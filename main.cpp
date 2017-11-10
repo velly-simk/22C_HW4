@@ -79,7 +79,6 @@ int main()
    cout  << endl; 
 
 
-/*
    // Part 2: Inserting data in random order
    BinarySearchTree<string> tree2;
    
@@ -163,10 +162,17 @@ int main()
    string returnedString;
    cout << "Searching for node 80 returns " << tree2.getEntry("80", returnedString) << endl;
    cout << "Searching for node 40 returns " << tree2.getEntry("40", returnedString) << endl;
-*/
 
-/*
+
    // Part 3: Copying trees
+
+   tree1Ptr->clear();
+   tree1Ptr->insert("10");
+   tree1Ptr->insert("20");
+   tree1Ptr->insert("30");
+   tree1Ptr->insert("40");
+   tree1Ptr->insert("50");
+
    cout << "\nTesting copy constructor: \n";
    cout << "\nOriginal tree1: \n";
    cout << "Tree 1 Inorder: Should be 10 20 30 40 50\n";
@@ -194,6 +200,8 @@ int main()
    cout  << endl; 
 
    delete tree1Ptr;
-*/
+
+   getchar();
+
    return 0;
 }  

@@ -123,7 +123,7 @@ void BinaryTree<ItemType>::_inorder(void visit(ItemType &), BinaryNode<ItemType>
 		_inorder(visit, nodePtr->getLeftPtr());
 		ItemType item = nodePtr->getItem();
 		visit(item);
-		_inOrder(visit, nodePtr->getRightPtr());
+		_inorder(visit, nodePtr->getRightPtr());
 	}
 }  
 
@@ -131,8 +131,8 @@ template<class ItemType>
 void BinaryTree<ItemType>::_postorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const
 {
 	if (nodePtr != 0) {
-		_inorder(visit, nodePtr->getLeftPtr());
-		_inOrder(visit, nodePtr->getRightPtr());
+		_postorder(visit, nodePtr->getLeftPtr());
+		_postorder(visit, nodePtr->getRightPtr());
 		ItemType item = nodePtr->getItem();
 		visit(item);
 	}
@@ -142,6 +142,7 @@ template<class ItemType>
 BinaryTree<ItemType> & BinaryTree<ItemType>::operator=(const BinaryTree<ItemType> & sourceTree)
 {
 	if (this != &sourceTree) {
+		this->clear();
 
 		BinaryNode<ItemType> *ptr;
 

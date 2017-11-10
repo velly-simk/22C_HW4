@@ -117,10 +117,10 @@
     <ClInclude Include="Queue.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="hw4.cpp" />
+    <Text Include="employees.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="employees.txt" />
+    <ClCompile Include="hw4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
