@@ -18,9 +18,9 @@ public:
 
 	// constructors
 	BinaryNode(const ItemType & anItem) { item = anItem; leftPtr = 0; rightPtr = 0; depth = 0; }
-	BinaryNode(const ItemType & anItem, 
-		       BinaryNode<ItemType>* left, 
-			   BinaryNode<ItemType>* right) {item = anItem; leftPtr = left; rightPtr = right; depth= (left.depth > right.depth ? left : right) + 1}
+	BinaryNode(const ItemType & anItem, BinaryNode<ItemType>* left, BinaryNode<ItemType>* right) {
+		item = anItem; leftPtr = left; rightPtr = right; depth = (left.depth > right.depth ? left : right) + 1;
+	}
 	// accessors
 	void setItem(const ItemType & anItem) {item = anItem;}
 	void setLeftPtr(BinaryNode<ItemType>* left) {leftPtr = left;}
