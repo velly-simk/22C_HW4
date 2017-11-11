@@ -32,7 +32,7 @@ public:
 	// remove a node if found
 	bool remove(const ItemType & anEntry);
 	// find a target node
-	bool getEntry(const ItemType & target, ItemType & returnedItem) const; // is this a proper name?
+	bool getEntry(const ItemType & target, ItemType & returnedItem) const;
  
 };
 
@@ -46,6 +46,10 @@ bool BinarySearchTree<ItemType>::insert(const ItemType & newEntry)
 	int tmp = count;
 
 	_insert(this->rootPtr, newNodePtr);
+
+	// depth resolution
+	maxDepth = rootPtr->depth;
+
 	return count != tmp ;
 }  
 
@@ -91,6 +95,9 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType>* 
 			nodePtr->setLeftPtr(newNodePtr);
 			++count;
 		}
+		// depth resolution
+		if (nodePtr->depth == nodePtr->getLeftPtr()->depth)
+			nodePtr->depth += 1;
 	}
 	if (newNodePtr->getItem() > nodePtr->getItem()) {
 		ptr = nodePtr->getRightPtr();
@@ -98,6 +105,9 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType>* 
 			nodePtr->setRightPtr(newNodePtr);
 			++count;
 		}
+		// depth resolution
+		if (nodePtr->depth == nodePtr->getRightPtr()->depth)
+			nodePtr->depth += 1;
 	}
 
 	return nodePtr;

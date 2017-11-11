@@ -46,7 +46,21 @@ int printQueue(Queue<string> &queue);
 /* prints contents of bst to stdout */
 int printBST(BinarySearchTree<Employee> &bst);
 
-void visit(Employee &emp);
+/* prints tree in breadth first format */
+int printBST_breadth(BinaryTree<Employee> &bst);
+
+/* prints employee to stdout */
+void coutPrint(Employee &emp);
+
+void testPrint(int offs, int odd, int dir);
+
+/* prints to stdout bst in breadth first traversal */
+int breadthPrint(BinarySearchTree<Employee> &bst);
+
+/* prints to stdout bst in breadth first preorder, inorder and postorder */
+int depthPrint(BinarySearchTree<Employee> &bst);
+
+void treePrint(Employee &item, int x);
 
 /* employee operator overloads */
 bool operator<(Employee a, Employee b) { return a.getId() < b.getId(); }

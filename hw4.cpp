@@ -3,11 +3,11 @@
 #include <iostream>
 #include <string>
 
+
 #include "BinarySearchTree.h"
 #include "Queue.h"
 #include "hw4.h"
 
-#define DEBUG 1
 
 int main(int charc, char *argv[]) {
 	Queue<string> readFileLines;
@@ -15,12 +15,6 @@ int main(int charc, char *argv[]) {
 
 	readFile("employees.txt", readFileLines);
 	processLines(readFileLines, db);
-
-	if (DEBUG) {
-		printQueue(readFileLines);
-	}
-
-	std::cout << readFileLines.getCount() << std::endl;
 
 	menuManager(db);
 
@@ -44,21 +38,34 @@ int menuManager(BinarySearchTree<Employee> &bst) {
 			searchManager(bst);
 		}
 		else if (input[0] == 'D') {
-
+			depthPrint(bst);
 		}
 		else if (input[0] == 'B') {
-
+			breadthPrint(bst);
 		}
 		else if (input[0] == 'T') {
-
+			printBST(bst);
 		}
 		else if (input[0] == 'L') {
+			Employee left = Employee(0, "");
+			bst.getLeftMost(left);
 
+			if (left.getId() != 0)
+				coutPrint(left);
+			else
+				std::cout << "Database is empty." << std::endl;
 		}
 		else if (input[0] == 'H') {
+			Employee right = Employee(0,"");
+			bst.getRightMost(right);
 
+			if (right.getId())
+				coutPrint(right);
+			else
+				std::cout << "Database is empty." << std::endl;
 		}
 		else if (input[0] == 'M') {
+			std::cout << std::endl;
 			printMenu();
 		}
 		else if (input[0] == 'A') {
@@ -72,19 +79,19 @@ int menuManager(BinarySearchTree<Employee> &bst) {
 
 int printMenu() {
 	std::cout << "Employee Database Menu" << std::endl;
-	std::cout << "S - Search by unique key." << std::endl;
-	std::cout << "D - Recursive Depth-First Traversals." << std::endl;
-	std::cout << "B - Breadth-First Traversal." << std::endl;
-	std::cout << "T - Print Tree." << std::endl;
-	std::cout << "L - Print Smallest Key." << std::endl;
-	std::cout << "H - Print Largest Key." << std::endl;
-	std::cout << "M - Show Menu." << std::endl;
-	std::cout << "Q - Quit Program." << std::endl;
+	std::cout << "\t\tS - Search by unique key." << std::endl;
+	std::cout << "\t\tD - Recursive Depth-First Traversals." << std::endl;
+	std::cout << "\t\tB - Breadth-First Traversal." << std::endl;
+	std::cout << "\t\tT - Print Tree." << std::endl;
+	std::cout << "\t\tL - Print Smallest Key." << std::endl;
+	std::cout << "\t\tH - Print Largest Key." << std::endl;
+	std::cout << "\t\tM - Show Menu." << std::endl;
+	std::cout << "\t\tQ - Quit Program." << std::endl;
 	return 0;
 }
 
 int printAuthor() {
-	std::cout << "Program author: Velly Simeonov" << std::endl;
+	std::cout << "\t\tProgram author: Velly Simeonov" << std::endl;
 	return 0;
 }
 
@@ -100,10 +107,12 @@ int searchManager(BinarySearchTree<Employee> &bst) {
 			try {
 				if ((id = std::stoi(input, NULL)) > 0) {
 					Employee a = Employee(id, std::string(""));
-					if (bst.getEntry(a, a))
-						std::cout << "\t" << a.getId() << " Found : " << a.getName() << std::endl;
+					if (bst.getEntry(a, a)) {
+						std::cout << std::endl;
+						coutPrint(a);
+					}
 					else {
-						std::cout << "\t" << a.getId() << " Not found." << std::endl;
+						std::cout << "\n\t\t" << a.getId() << " Not found." << std::endl;
 					}
 					id = -1;
 				}
@@ -170,9 +179,208 @@ int printQueue(Queue<string> &queue) {
 }
 
 int printBST(BinarySearchTree<Employee> &bst) {
+	/* vertical table
+	Employee *employees = NULL;
+	int arrSize = pow(2, bst.Depth() + 1) - 1;
+	int negtabs, tabs = bst.Depth();
+
+	
+	bst.toArray(employees);
+	
+	for (int i = 0; i < arrSize; ++i) {
+		negtabs = log2(i + 1);
+		for (int x = 0; x <= tabs - negtabs; ++x) std::cout << "\t";
+		std::cout << negtabs+1 << ". "  << employees[i].getId() << "\t";
+		if (i+1 == pow(2,negtabs+1)-1) std::cout << "\n";
+	}
+	delete[] employees;
+	*/
+
+	std::cout << "\nBinary tree growing horizontally :\n" << std::endl;
+	bst.inOrderR(treePrint);
+	std::cout << std::endl;
 	return 0;
 }
 
-void visit(Employee &emp) {
-	std::cout << emp.getId() << " " << emp.getName() << std::endl;
+void coutPrint(Employee &emp) {
+	std::cout << "\t\t" << emp.getId() << " " << emp.getName() << std::endl;
 }
+
+
+void testPrint(int top, int bot, int dir) {
+	int newTop, newBot;
+
+	newTop = top * 2;
+	newBot = 2 * bot - 1;
+	
+	std::cout << top << " : " << bot << std::endl;
+
+	if (top < 1)
+		newTop = 1;
+	
+	if ((dir == 0) && (top < 9)){
+		testPrint(newTop, newBot, 0);
+		testPrint(newTop + 1, newBot + 2, 1);
+	}
+	else if ((dir == 1) && (top < 9)) {
+		testPrint(newTop - 1, newBot, 0);
+		testPrint(newTop, newBot + 2, 1);
+	}
+}
+
+int breadthPrint(BinarySearchTree<Employee> &bst) {
+	Queue<Employee> employees;
+	Employee a;
+	bst.breadthOrder(employees);
+
+	std::cout << "\nBinary Tree in Breadth-First Traversal Order : " << std::endl;
+
+	while (!employees.isEmpty()) {
+		employees.dequeue(a);
+		coutPrint(a);
+	}
+	return 0;
+}
+
+int depthPrint(BinarySearchTree<Employee> &bst) {
+	std::cout << "\nEmployees in Pre-Order depth traversal : " << std::endl;
+	bst.preOrder(coutPrint);
+	std::cout << "\nEmployees in In-Order depth traversal : " << std::endl;
+	bst.inOrder(coutPrint);
+	std::cout << "\nEmployees in Post-Order depth traversal : " << std::endl;
+	bst.postOrder(coutPrint);
+	return 0;
+}
+
+void treePrint(Employee &item, int x) {
+	for (int i = 0; i < x; ++i) std::cout << "\t";
+	std::cout << x << ". " << item.getId() << std::endl;
+}
+
+
+/* program sample : tabs are missing
+
+Employee Database Menu
+S - Search by unique key.
+D - Recursive Depth-First Traversals.
+B - Breadth-First Traversal.
+T - Print Tree.
+L - Print Smallest Key.
+H - Print Largest Key.
+M - Show Menu.
+Q - Quit Program.
+User command : t
+
+Binary tree growing horizontally :
+
+2. 5044
+3. 4033
+1. 3099
+2. 3088
+3. 3055
+0. 3022
+2. 2077
+3. 2066
+1. 1022
+2. 1011
+
+User command : s
+Employee ID (or Q to go back) : 2066
+
+2066  Sophia Williams
+Employee ID (or Q to go back) : 1
+
+1 Not found.
+Employee ID (or Q to go back) : -1
+Employee ID (or Q to go back) : 0
+Employee ID (or Q to go back) : 3022
+
+3022  Duo Xue
+Employee ID (or Q to go back) : 99999999999999999
+Employee ID (or Q to go back) : 301923
+
+301923 Not found.
+Employee ID (or Q to go back) :
+Employee ID (or Q to go back) : q
+User command : m
+
+Employee Database Menu
+S - Search by unique key.
+D - Recursive Depth-First Traversals.
+B - Breadth-First Traversal.
+T - Print Tree.
+L - Print Smallest Key.
+H - Print Largest Key.
+M - Show Menu.
+Q - Quit Program.
+User command : d
+
+Employees in Pre-Order depth traversal :
+3022  Duo Xue
+1022  John Plemmons
+1011  Ashley McMullen
+2077  Bill Twain
+2066  Sophia Williams
+3099  Adriana Ho
+3088  Josh Smith
+3055  Tim Nguyen
+5044  Debbie Lancaster
+4033  Dale Meht
+
+Employees in In-Order depth traversal :
+1011  Ashley McMullen
+1022  John Plemmons
+2066  Sophia Williams
+2077  Bill Twain
+3022  Duo Xue
+3055  Tim Nguyen
+3088  Josh Smith
+3099  Adriana Ho
+4033  Dale Meht
+5044  Debbie Lancaster
+
+Employees in Post-Order depth traversal :
+1011  Ashley McMullen
+2066  Sophia Williams
+2077  Bill Twain
+1022  John Plemmons
+3055  Tim Nguyen
+3088  Josh Smith
+4033  Dale Meht
+5044  Debbie Lancaster
+3099  Adriana Ho
+3022  Duo Xue
+User command : m
+
+Employee Database Menu
+S - Search by unique key.
+D - Recursive Depth-First Traversals.
+B - Breadth-First Traversal.
+T - Print Tree.
+L - Print Smallest Key.
+H - Print Largest Key.
+M - Show Menu.
+Q - Quit Program.
+User command : b
+
+Binary Tree in Breadth-First Traversal Order :
+3022  Duo Xue
+1022  John Plemmons
+3099  Adriana Ho
+1011  Ashley McMullen
+2077  Bill Twain
+3088  Josh Smith
+5044  Debbie Lancaster
+2066  Sophia Williams
+3055  Tim Nguyen
+4033  Dale Meht
+User command : l
+1011  Ashley McMullen
+User command : h
+5044  Debbie Lancaster
+User command : a
+Program author: Velly Simeonov
+User command :
+
+
+*/

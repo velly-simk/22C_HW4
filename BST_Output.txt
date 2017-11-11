@@ -1,0 +1,124 @@
+note: Tabs did not copy...
+
+
+Employee Database Menu
+S - Search by unique key.
+D - Recursive Depth-First Traversals.
+B - Breadth-First Traversal.
+T - Print Tree.
+L - Print Smallest Key.
+H - Print Largest Key.
+M - Show Menu.
+Q - Quit Program.
+User command : t
+
+Binary tree growing horizontally :
+
+2. 5044
+3. 4033
+1. 3099
+2. 3088
+3. 3055
+0. 3022
+2. 2077
+3. 2066
+1. 1022
+2. 1011
+
+User command : s
+Employee ID (or Q to go back) : 2066
+
+2066  Sophia Williams
+Employee ID (or Q to go back) : 1
+
+1 Not found.
+Employee ID (or Q to go back) : -1
+Employee ID (or Q to go back) : 0
+Employee ID (or Q to go back) : 3022
+
+3022  Duo Xue
+Employee ID (or Q to go back) : 99999999999999999
+Employee ID (or Q to go back) : 301923
+
+301923 Not found.
+Employee ID (or Q to go back) :
+Employee ID (or Q to go back) : q
+User command : m
+
+Employee Database Menu
+S - Search by unique key.
+D - Recursive Depth-First Traversals.
+B - Breadth-First Traversal.
+T - Print Tree.
+L - Print Smallest Key.
+H - Print Largest Key.
+M - Show Menu.
+Q - Quit Program.
+User command : d
+
+Employees in Pre-Order depth traversal :
+3022  Duo Xue
+1022  John Plemmons
+1011  Ashley McMullen
+2077  Bill Twain
+2066  Sophia Williams
+3099  Adriana Ho
+3088  Josh Smith
+3055  Tim Nguyen
+5044  Debbie Lancaster
+4033  Dale Meht
+
+Employees in In-Order depth traversal :
+1011  Ashley McMullen
+1022  John Plemmons
+2066  Sophia Williams
+2077  Bill Twain
+3022  Duo Xue
+3055  Tim Nguyen
+3088  Josh Smith
+3099  Adriana Ho
+4033  Dale Meht
+5044  Debbie Lancaster
+
+Employees in Post-Order depth traversal :
+1011  Ashley McMullen
+2066  Sophia Williams
+2077  Bill Twain
+1022  John Plemmons
+3055  Tim Nguyen
+3088  Josh Smith
+4033  Dale Meht
+5044  Debbie Lancaster
+3099  Adriana Ho
+3022  Duo Xue
+User command : m
+
+Employee Database Menu
+S - Search by unique key.
+D - Recursive Depth-First Traversals.
+B - Breadth-First Traversal.
+T - Print Tree.
+L - Print Smallest Key.
+H - Print Largest Key.
+M - Show Menu.
+Q - Quit Program.
+User command : b
+
+Binary Tree in Breadth-First Traversal Order :
+3022  Duo Xue
+1022  John Plemmons
+3099  Adriana Ho
+1011  Ashley McMullen
+2077  Bill Twain
+3088  Josh Smith
+5044  Debbie Lancaster
+2066  Sophia Williams
+3055  Tim Nguyen
+4033  Dale Meht
+User command : l
+1011  Ashley McMullen
+User command : h
+5044  Debbie Lancaster
+User command : a
+Program author: Velly Simeonov
+User command :
