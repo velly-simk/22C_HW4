@@ -1,4 +1,10 @@
+/*
+	Homework 4 main entry point and helpers.
 
+	22C Fall 2017
+
+	Velly Simeonov
+*/
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -197,7 +203,7 @@ int printBST(BinarySearchTree<Employee> &bst) {
 	*/
 
 	std::cout << "\nBinary tree growing horizontally :\n" << std::endl;
-	bst.inOrderR(treePrint);
+	bst.inOrderR(nodePrint);
 	std::cout << std::endl;
 	return 0;
 }
@@ -252,7 +258,7 @@ int depthPrint(BinarySearchTree<Employee> &bst) {
 	return 0;
 }
 
-void treePrint(Employee &item, int x) {
+void nodePrint(Employee &item, int x) {
 	for (int i = 0; i < x; ++i) std::cout << "\t";
 	std::cout << x << ". " << item.getId() << std::endl;
 }

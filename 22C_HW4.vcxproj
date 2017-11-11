@@ -113,6 +113,7 @@
     <ClInclude Include="BinaryNode.h" />
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="Employee.h" />
     <ClInclude Include="hw4.h" />
     <ClInclude Include="Queue.h" />
   </ItemGroup>
